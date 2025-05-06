@@ -515,7 +515,9 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
                 .color(Color.BLUE)
                 .geodesic(true)
             
-            rutasPolylines[id] = mMap?.addPolyline(polylineOptions)
+            mMap?.addPolyline(polylineOptions)?.let { polyline ->
+                rutasPolylines[id] = polyline
+            }
         }
     }
 
