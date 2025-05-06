@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">BusetasGo</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="Pasajero">Pasajero</string>
+    <string name="conductor">Conductor</string>
+    <string name="iniciars">Iniciar Sesion</string>
+    <string name="crearC">Crear Cuenta</string>
+    <string name="correo">Correo Electronico</string>
+    <string name="password">Contraseña</string>
+    <string name="newpassword">¿Has olvidado tu contraseña?</string>
+    <string name="crearD">CREAR UNA CUENTA</string>
+    <string name="nom">Nombre</string>
+    <string name="fecha">Fecha de nacimiento</string>
+    <string name="registrar">Registrar</string>
+    <string name="ubicacion">Ubicacion</string>
+    <string name="usuario">Usuario</string>
+    <string name="mapa">Ver Mapa</string>
+    <string name="perfil">Perfil</string>
+    <string name="busetas">Busetas Cercanas</string>
+    <string name="notificaciones">Notificaciones</string>
+    <string name="generalC">General</string>
+    <string name="informacion">Informacion del vehiculo</string>
+    <string name="placa">Placa del vehiculo</string>
+    <string name="color">Color del vehiculo</string>
+    <string name="entidad">Entidad con la que opera</string>
+    <string name="capacidad">Capacidad del vehiculo</string>
+    <string name="restaurar">Restaurar Contraseña</string>
+    <string name="enviar">Enviar restauracion al correo</string>
+    <string name="ape">Apellido</string>
+
+
+</resources>

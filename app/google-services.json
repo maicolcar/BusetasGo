@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "98128947499",
+    "project_id": "busetasgofire",
+    "storage_bucket": "busetasgofire.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:98128947499:android:9723f54390fd362c1afd6e",
+        "android_client_info": {
+          "package_name": "com.busetas.busetasgo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFddJDQRKyv5JiScDF_w5nVizqc4GUf-E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".startpage.PerfilPasajero">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imagenP"
+        android:layout_width="140dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/icono_p"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/usuarioP"
+        android:layout_width="140dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginTop="4dp"
+        android:contentDescription="@string/usuario"
+        android:text="@string/usuario"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagenP" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/nom_usuario"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="300dp"
+        android:contentDescription="@string/nom"
+        android:text="@string/nom"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contieneNom"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:background="@drawable/fondo"
+        android:padding="16dp"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.590"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nom_usuario" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/ape_usuario"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="385dp"
+        android:contentDescription="@string/ape"
+        android:text="Fecha"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contieneApe"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:background="@drawable/fondo"
+        android:padding="16dp"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.590"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ape_usuario" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/correo_usuario"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="470dp"
+        android:contentDescription="@string/correo"
+        android:text="@string/correo"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/contieneCorreo"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:background="@drawable/fondo"
+        android:padding="16dp"
+        android:text=""
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.590"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/correo_usuario" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registrarP"
+        android:layout_width="232dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/boton_c"
+        android:text="CERRAR SESIÓN"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@id/navigationBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/navigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="60dp"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingVertical="4dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/perfil"
+            android:textColor="@color/black"
+            android:background="@color/white" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/busetas_cercanas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/busetas"
+            android:textColor="@color/black"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+    <!-- Contenedor para el fragmento de mapa -->
+    <FrameLayout
+        android:id="@+id/map_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
