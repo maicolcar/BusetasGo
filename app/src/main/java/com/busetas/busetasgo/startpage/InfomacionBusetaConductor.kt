@@ -24,6 +24,7 @@ import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationResult
 import android.widget.Spinner
 import android.widget.ArrayAdapter
+import com.google.android.gms.maps.model.LatLng
 
 class InfomacionBusetaConductor : AppCompatActivity() {
     private lateinit var placaEditText: AppCompatEditText
@@ -42,6 +43,34 @@ class InfomacionBusetaConductor : AppCompatActivity() {
     private var locationCallback: LocationCallback? = null
     private var locationRequest: LocationRequest? = null
     private val rutas = arrayOf("Seleccione una ruta", "Ruta 1", "Ruta 2", "Ruta 3")
+
+    // Mapa de rutas con sus puntos
+    private val puntosRuta = mapOf(
+        "Ruta 1" to listOf(
+            LatLng(4.6097, -74.0817), // Las Quintas
+            LatLng(4.6100, -74.0820), // Supermercado Zapatoca
+            LatLng(4.6105, -74.0825), // Plaza de Mercado
+            LatLng(4.6110, -74.0830), // Almacenes Éxito
+            LatLng(4.6115, -74.0835), // Universidad Cundinamarca
+            LatLng(4.6120, -74.0840)  // Ecopetrol
+        ),
+        "Ruta 2" to listOf(
+            LatLng(4.6097, -74.0817), // Las Quintas
+            LatLng(4.6105, -74.0825), // Plaza de Mercado
+            LatLng(4.6110, -74.0830), // Barrio Girardot
+            LatLng(4.6115, -74.0835), // San Benito
+            LatLng(4.6120, -74.0840), // Parque Santa Rita
+            LatLng(4.6125, -74.0845), // Supermercado Metro
+            LatLng(4.6130, -74.0850)  // Brasilia
+        ),
+        "Ruta 3" to listOf(
+            LatLng(4.6130, -74.0850), // Brasilia
+            LatLng(4.6135, -74.0855), // Clínica Santa Ana
+            LatLng(4.6140, -74.0860), // Comando de Policía
+            LatLng(4.6145, -74.0865), // Portal de María
+            LatLng(4.6150, -74.0870)  // San Benito
+        )
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -229,6 +258,16 @@ class InfomacionBusetaConductor : AppCompatActivity() {
             if (location != null) {
                 val latitud = location.latitude
                 val longitud = location.longitude
+                
+                // Obtener puntos de la ruta seleccionada
+                val puntosRutaSeleccionada = puntosRuta[ruta] ?: emptyList()
+                val puntosRutaData = puntosRutaSeleccionada.map { latLng ->
+                    mapOf(
+                        "lat" to latLng.latitude,
+                        "lng" to latLng.longitude
+                    )
+                }
+
                 val vehiculoData = hashMapOf(
                     "placa" to placa,
                     "color" to color,
@@ -239,6 +278,7 @@ class InfomacionBusetaConductor : AppCompatActivity() {
                         "lat" to latitud,
                         "lng" to longitud
                     ),
+                    "puntosRuta" to puntosRutaData,
                     "ultimaActualizacion" to Date()
                 )
                 db.collection("vehiculos").document(userId)

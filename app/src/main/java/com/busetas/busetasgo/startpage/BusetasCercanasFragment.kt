@@ -39,6 +39,9 @@ import com.google.android.libraries.places.api.net.FetchPlaceResponse
 import android.app.AlertDialog
 import kotlin.math.roundToInt
 import com.google.firebase.auth.FirebaseAuth
+import com.google.android.gms.maps.model.Polyline
+import com.google.android.gms.maps.model.PolylineOptions
+import android.graphics.Color
 
 class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
 
@@ -51,6 +54,7 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
     private var lastKnownLocation: Location? = null
     private var mapFragment: SupportMapFragment? = null
     private var conductorMarkers: MutableMap<String, Marker> = mutableMapOf()
+    private var rutasPolylines: MutableMap<String, Polyline> = mutableMapOf()
     private lateinit var placesClient: PlacesClient
     private var isUserInteracting = false
     private var isFirstLocationUpdate = true
@@ -397,6 +401,9 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
             fusedLocationClient.removeLocationUpdates(locationCallback)
             locationUpdateState = false
             mMap = null
+            // Limpiar todas las rutas al destruir la vista
+            rutasPolylines.values.forEach { it.remove() }
+            rutasPolylines.clear()
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -427,6 +434,18 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
                         val entidad = doc.getString("entidad") ?: "Sin entidad"
                         val capacidad = doc.getString("capacidad") ?: "Sin capacidad"
                         val ruta = doc.getString("ruta") ?: "Sin ruta"
+                        
+                        // Obtener puntos de la ruta
+                        val puntosRuta = doc.get("puntosRuta") as? List<Map<*, *>> ?: emptyList()
+                        val puntosLatLng = puntosRuta.map { punto ->
+                            val latPunto = (punto["lat"] as? Double) ?: 0.0
+                            val lngPunto = (punto["lng"] as? Double) ?: 0.0
+                            LatLng(latPunto, lngPunto)
+                        }
+
+                        // Actualizar o crear la ruta en el mapa
+                        actualizarRutaEnMapa(id, puntosLatLng)
+
                         val inforuta = when (ruta) {
                             "Ruta 1" -> """
                             RUTA 1
@@ -436,7 +455,7 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
                             Almacenes Éxito
                             Universidad Cundinamarca
                             Ecopetrol
-                        """.trimIndent()
+                            """.trimIndent()
                             "Ruta 2" -> """
                             RUTA 2
                             Las Quintas
@@ -446,7 +465,7 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
                             Parque Santa Rita
                             Supermercado Metro
                             Brasilia
-                        """.trimIndent()
+                            """.trimIndent()
                             "Ruta 3" -> """
                             RUTA 3
                             Brasilia
@@ -454,11 +473,10 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
                             Comando de Policía
                             Portal de María
                             San Benito
-                        """.trimIndent()
+                            """.trimIndent()
                             else -> "Sin información de ruta"
                         }
                         val info = "Placa: $placa\nColor: $color\nEntidad: $entidad\nCapacidad: $capacidad\nruta: $inforuta"
-
 
                         // Actualiza o crea el marcador
                         if (conductorMarkers[id] == null) {
@@ -473,14 +491,32 @@ class BusetasCercanasFragment : Fragment(), OnMapReadyCallback {
                             conductorMarkers[id]?.snippet = info
                         }
                     }
-                    // Eliminar marcadores de busetas que ya no tienen ubicación
+                    // Eliminar marcadores y rutas de busetas que ya no tienen ubicación
                     val idsAEliminar = conductorMarkers.keys - idsConUbicacion
                     for (id in idsAEliminar) {
                         conductorMarkers[id]?.remove()
                         conductorMarkers.remove(id)
+                        rutasPolylines[id]?.remove()
+                        rutasPolylines.remove(id)
                     }
                 }
             }
+    }
+
+    private fun actualizarRutaEnMapa(id: String, puntos: List<LatLng>) {
+        // Eliminar la ruta anterior si existe
+        rutasPolylines[id]?.remove()
+        
+        if (puntos.isNotEmpty()) {
+            // Crear una nueva ruta
+            val polylineOptions = PolylineOptions()
+                .addAll(puntos)
+                .width(10f)
+                .color(Color.BLUE)
+                .geodesic(true)
+            
+            rutasPolylines[id] = mMap?.addPolyline(polylineOptions)
+        }
     }
 
     // Adaptador personalizado para la ventana de información
